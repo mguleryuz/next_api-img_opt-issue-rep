@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
 
-export async function GET() {
+export async function GET(
+  _: Request,
+  { params }: { params: { slug: string } }
+) {
   try {
-    const fileName = `vercel.png`;
+    const fileName = params.slug;
 
     // Build the file path from the static directory
     const filePath = path.join(process.cwd(), fileName);
