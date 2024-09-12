@@ -11,7 +11,7 @@ export default async function Home() {
         </TabsList>
         <TabsContent value="slug">
           <Image
-            src={`/api/image/${"vercel.png"}`}
+            src={`/api/image/${"gstatic"}`}
             width="800"
             height="184"
             alt=""

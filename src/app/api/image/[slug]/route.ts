@@ -7,19 +7,24 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const fileName = params.slug;
+    const imageUrl = `https://encrypted-tbn0.${params.slug}.com/images?q=tbn:ANd9GcQ8D-IfTA58NONTORVfigb72pKqp8hHiEm7SA&s`;
 
-    // Build the file path from the static directory
-    const filePath = path.join(process.cwd(), fileName);
+    // Fetch the image from the URL
+    const response = await fetch(imageUrl);
 
-    // Read the image file into a Buffer
-    const imageBuffer = await fs.readFile(filePath);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+
+    // Convert the response to an array buffer and then to a Node.js Buffer
+    const arrayBuffer = await response.arrayBuffer();
+    const imageBuffer = Buffer.from(arrayBuffer);
 
     // Set appropriate headers and return the image buffer
     return new NextResponse(imageBuffer, {
       headers: {
         "Content-Type": "image/png", // PNG format
-        "Content-Disposition": `inline; filename="${fileName}"`,
+        "Content-Disposition": `inline; filename="image.png"`,
         "Cache-Control": "public, max-age=31536000, immutable", // Cache headers for long-lived assets
       },
     });
