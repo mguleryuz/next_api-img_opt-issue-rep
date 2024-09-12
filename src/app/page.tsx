@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default async function Home() {
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <Tabs defaultValue="account" className="w-[400px]">
+      <Tabs defaultValue="slug" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="slug">With Slug IMG Route</TabsTrigger>
           <TabsTrigger value="non-slug">Without Slug IMG Route</TabsTrigger>
